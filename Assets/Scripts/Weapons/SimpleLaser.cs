@@ -22,14 +22,20 @@ public class SimpleLaser : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //Comprobar con que choca el laser
-        Debug.Log("Laser a chocado con: " + other.gameObject.name);
-
-        BaseShip ship = other.GetComponent<BaseShip>();
-        if (ship != null)
+        if (!other.CompareTag("Player")) 
         {
-            ship.Health -= (int)damage;
+            if (other.CompareTag("Enemy"))
+            {
+                //Comprobar con que choca el laser
+                Debug.Log("Laser a chocado con: " + other.gameObject.name);
+
+                BaseShip target = other.GetComponent<BaseShip>();
+                if (target != null)
+                {
+                    target.Health -= (int)damage;
+                }
+                Destroy(gameObject);
+            }
         }
-        Destroy(gameObject);
     }
 }

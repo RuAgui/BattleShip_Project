@@ -8,6 +8,9 @@ public class BaseShip : MonoBehaviour
     {
         get { return health; }
         set { health = value;
+
+            Debug.Log($"{gameObject.name} ahora tiene: {health} de vida"); // Log para verificar el cambio de vida
+
             if (health <= 0)
             {
                 Die();

@@ -36,12 +36,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        HandleRotation();
     }
 
     private void FixedUpdate()
     {
         HandleMovement();
+        HandleRotation();
+
     }
 
     private void HandleMovement()

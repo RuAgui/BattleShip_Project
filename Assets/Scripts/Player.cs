@@ -10,7 +10,17 @@ public class Player : BaseShip
     {
         //Aqui se podria escribir logica adicional al obtener o asignar el valor
         get { return experience; }
-        set { experience = value; }
+        set { 
+            int levelBefore = Level; // Guardamos el nivel antes de asignar la experiencia
+            experience = value;
+
+            Debug.Log($"¡Ganaste EXP! total: {experience}");
+
+            if (Level > levelBefore) // Verificamos si el nivel ha aumentado
+            {
+                Debug.Log($"¡Subiste de nivel! Ahora eres nivel {Level}");
+            }
+        }
     }
 
     public int Level
