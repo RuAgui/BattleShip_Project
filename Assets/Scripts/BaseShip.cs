@@ -2,7 +2,10 @@ using UnityEngine;
 
 public class BaseShip : MonoBehaviour
 {
-    protected int health;
+    [SerializeField] protected int health;
+    [SerializeField] protected int experience;
+
+    public int Level => (experience / 1000) + 1;
 
     public int Health
     {
@@ -17,6 +20,22 @@ public class BaseShip : MonoBehaviour
                 Debug.Log($"{gameObject.name} ha sido destruida.");
             }
         }
+    }
+
+    public int Experience
+    {
+        get => experience;
+        set
+        {
+            int levelBefore = Level;
+            experience = value;
+            if (Level > levelBefore) OnLevelUp();
+        }
+    }
+
+    protected virtual void OnLevelUp()
+    {
+        Debug.Log($"{gameObject.name} ha subido de nivel a: {Level}");
     }
 
     protected virtual void Die()

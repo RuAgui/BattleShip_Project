@@ -27,7 +27,13 @@ public class PlayerCombat : MonoBehaviour
 
         foreach (Transform point in firePoint)
         {
-            Instantiate(laserPrefab, point.position, point.rotation); //UTEEEE!!
+            GameObject laserGO = Instantiate(laserPrefab, point.position, point.rotation); //UTEEEE!!
+
+            SimpleLaser laserScript = laserGO.GetComponent<SimpleLaser>();
+            if (laserScript != null)
+            {
+                laserScript.ownerShooter = GetComponent<BaseShip>(); // Asignar el propietario del disparo
+            }
         } 
     }
 }

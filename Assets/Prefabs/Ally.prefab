@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 3371833471392085485}
   - component: {fileID: 84904537082048765}
   - component: {fileID: 8350235023871429263}
+  - component: {fileID: -7820235111973391584}
+  - component: {fileID: 2085680896351700093}
   m_Layer: 0
   m_Name: Ally
   m_TagString: Ally
@@ -134,3 +136,45 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 26, y: 2, z: 19}
   m_Center: {x: -0.23520184, y: 2.1317956, z: 2.548542}
+--- !u!114 &-7820235111973391584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3047083402325453050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b543474c6c0c28a438069384f04c5d39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnitAI
+  targetMotherShip: {fileID: 0}
+  speed: 10
+  stopDistance: 50
+--- !u!54 &2085680896351700093
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3047083402325453050}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1

@@ -12,8 +12,10 @@ GameObject:
   - component: {fileID: 5554942606270577834}
   - component: {fileID: 6675327982386641264}
   - component: {fileID: 5257215807198265780}
-  - component: {fileID: 8630982514675754415}
   - component: {fileID: 2468771364910129444}
+  - component: {fileID: 1791195900796108676}
+  - component: {fileID: 8630982514675754415}
+  - component: {fileID: -8584697889425106341}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -114,18 +116,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3300887527594331929, guid: c3243430cd7d9aa479ca13a9e47ad748, type: 3}
---- !u!114 &8630982514675754415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1239218490876724157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fed3eae47da2184e8a3773a95ec83c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BaseShip
 --- !u!65 &2468771364910129444
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -147,3 +137,59 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 26, y: 2, z: 19}
   m_Center: {x: -0.00000047683716, y: 2.1317956, z: 2.8099656}
+--- !u!54 &1791195900796108676
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239218490876724157}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
+--- !u!114 &8630982514675754415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239218490876724157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fed3eae47da2184e8a3773a95ec83c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BaseShip
+  health: 0
+  experience: 0
+--- !u!114 &-8584697889425106341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239218490876724157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b543474c6c0c28a438069384f04c5d39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnitAI
+  targetMotherShip: {fileID: 0}
+  speed: 10
+  stopDistance: 50

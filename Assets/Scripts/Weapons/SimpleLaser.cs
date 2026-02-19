@@ -7,6 +7,9 @@ public class SimpleLaser : MonoBehaviour
     [SerializeField] private float damage = 10f;
     [SerializeField] private Vector3 startPosition;
 
+    public BaseShip ownerShooter;
+    public float Damage => damage;
+
     private void Start()
     {
         startPosition = transform.position;
@@ -22,20 +25,23 @@ public class SimpleLaser : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player")) 
-        {
-            if (other.CompareTag("Enemy"))
-            {
-                //Comprobar con que choca el laser
-                Debug.Log("Laser a chocado con: " + other.gameObject.name);
+        BaseShip target = other.GetComponent<BaseShip>();
 
-                BaseShip target = other.GetComponent<BaseShip>();
-                if (target != null)
-                {
-                    target.Health -= (int)damage;
-                }
-                Destroy(gameObject);
+        // 1. Verificamos que chocamos con una nave y que no somos nosotros mismos
+        if (target != null && target != ownerShooter)
+        {
+            target.Health -= (int)damage;
+            Debug.Log("Laser ha chocado con: " + other.gameObject.name);
+
+            // 2. RECOMPENSA: Si la víctima muere por este impacto
+            if (target.Health <= 0 && ownerShooter != null)
+            {
+                // El que disparó recibe la experiencia
+                ownerShooter.Experience += 200;
+                Debug.Log($"{ownerShooter.name} recibió EXP por destruir a {target.name}");
             }
+
+            Destroy(gameObject);
         }
     }
 }
