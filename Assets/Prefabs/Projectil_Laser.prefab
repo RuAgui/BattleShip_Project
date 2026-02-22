@@ -191,6 +191,7 @@ MonoBehaviour:
   lifeTime: 5
   damage: 10
   startPosition: {x: 0, y: 0, z: 0}
+  ownerShooter: {fileID: 0}
 --- !u!96 &3248779191059551060
 TrailRenderer:
   serializedVersion: 3

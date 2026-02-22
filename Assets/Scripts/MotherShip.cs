@@ -47,11 +47,10 @@ public class MotherShip : BaseShip
                 if (ai != null)
                 {
                     ai.targetMotherShip = targetMothership; // Asignar la referencia a la MotherShip enemiga
+                    ai.myMotherShip = this; // Asignar la referencia a su propia MotherShip
 
                 }
             }
-            // PAUSA LARGA ENTRE GRUPOS DE NAVES.
-            yield return new WaitForSeconds(spawnRate);
         }
         
     }
