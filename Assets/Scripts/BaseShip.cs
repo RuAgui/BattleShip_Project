@@ -7,6 +7,8 @@ public class BaseShip : MonoBehaviour
 
     public int Level => (experience / 1000) + 1;
 
+    public int MaxHealth => 100 + (Level - 1) * 20; // Ejemplo de fórmula para salud máxima basada en el nivel
+
     public int Health
     {
         get { return health; }
