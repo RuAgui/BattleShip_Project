@@ -12,14 +12,12 @@ public class BaseShip : MonoBehaviour
     public int Health
     {
         get { return health; }
-        set { health = value;
-
-            Debug.Log($"{gameObject.name} ahora tiene: {health} de vida"); // Log para verificar el cambio de vida
-
+        set
+        {
+            health = value;
             if (health <= 0)
             {
                 Die();
-                Debug.Log($"{gameObject.name} ha sido destruida.");
             }
         }
     }
