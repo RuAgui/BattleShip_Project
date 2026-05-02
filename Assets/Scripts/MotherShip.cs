@@ -61,6 +61,6 @@ public class MotherShip : BaseShip
     protected override void Die()
     {
         OnMotherShipDestroy?.Invoke(this);
-        base.Die(); // esto sigue destruyendo el gameObject
+        base.Die();
     }
 }

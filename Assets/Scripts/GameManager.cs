@@ -1,19 +1,39 @@
-using Unity.VisualScripting;
+using UnityEngine.Events;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] Player myPlayer;
 
+    [Header("MOTHER SHIP SETTINGS")]
+
+    [SerializeField] private MotherShip motherShipAllied;
+    [SerializeField] private MotherShip motherShipEnemy;
+
     void Start()
     {
-        //dando valor a la variable experience a traves de la propiedad Experience, set
+        
+    }
 
-        myPlayer.Experience = 5;
+    private void OnEnable()
+    {
+        MotherShip.OnMotherShipDestroy += CheckIfDestroy;
+    }
 
-        myPlayer.Health = 100;
+    private void OnDisable()
+    {
+        MotherShip.OnMotherShipDestroy -= CheckIfDestroy;
+    }
 
-        // obteniendo el valor de la variable experience a traves de la propiedad Experience, get
-        int x = myPlayer.Experience; 
+    private void CheckIfDestroy(MotherShip destroyedShip)
+    {
+        if (destroyedShip == motherShipAllied)
+        {
+            Debug.Log("Has perdido, tu nave nodriza ha sido destruida.");
+        }
+        else if (destroyedShip == motherShipEnemy)
+        {
+            Debug.Log("Has ganado, la nave nodriza enemiga ha sido destruida.");
+        }
     }
 }
