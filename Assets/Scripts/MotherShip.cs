@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.Events;
 
 public class MotherShip : BaseShip
 {
@@ -8,6 +9,9 @@ public class MotherShip : BaseShip
     [SerializeField] private Transform[] spawnPoint;
     [SerializeField] private float spawnRate = 20f;
     [SerializeField] private MotherShip targetMothership; // Referencia a la otra MotherShip
+
+    public static event UnityAction<MotherShip> OnMotherShipDestroy;
+
 
     private void Start()
     {
@@ -53,5 +57,10 @@ public class MotherShip : BaseShip
             }
         }
         
+    }
+    protected override void Die()
+    {
+        OnMotherShipDestroy?.Invoke(this);
+        base.Die(); // esto sigue destruyendo el gameObject
     }
 }
