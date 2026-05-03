@@ -18,11 +18,13 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         MotherShip.OnMotherShipDestroy += CheckIfDestroy;
+        Player.OnPlayerDeath += CheckIfPlayerDeath;
     }
 
     private void OnDisable()
     {
         MotherShip.OnMotherShipDestroy -= CheckIfDestroy;
+        Player.OnPlayerDeath -= CheckIfPlayerDeath;
     }
 
     private void CheckIfDestroy(MotherShip destroyedShip)
@@ -34,6 +36,14 @@ public class GameManager : MonoBehaviour
         else if (destroyedShip == motherShipEnemy)
         {
             Debug.Log("Has ganado, la nave nodriza enemiga ha sido destruida.");
+        }
+    }
+
+    private void CheckIfPlayerDeath (Player player)
+    {
+        if (player == myPlayer)
+        {
+            Debug.Log("Has perdido, tu nave ha sido destruida.");
         }
     }
 }

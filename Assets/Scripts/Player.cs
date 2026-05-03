@@ -1,7 +1,11 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player : BaseShip
 {
+
+    public static event UnityAction <Player> OnPlayerDeath;
+
     protected override void OnLevelUp()
     {
         base.OnLevelUp();
@@ -10,8 +14,7 @@ public class Player : BaseShip
 
     protected override void Die()
     {
-        //Aqui agrego la logica de muerte del player.
-        Debug.Log("Player has died");
+        OnPlayerDeath?.Invoke(this); // Disparo el evento de muerte del jugador
         base.Die();
     }
 }
