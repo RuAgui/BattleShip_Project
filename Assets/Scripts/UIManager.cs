@@ -32,22 +32,36 @@ public class UIManager : MonoBehaviour
 
     private void ShowVictoryScreen()
     {
-        // Aquí puedes agregar lógica para actualizar la interfaz de usuario de salud, como barras de salud o indicadores.
+        if (victoryText != null)
+        {
+            victoryText.gameObject.SetActive(true);
+        }
     }
 
     private void ShowGameOverScreen()
     {
-        // Aquí puedes agregar lógica para actualizar la interfaz de usuario de experiencia, como barras de experiencia o indicadores.
+
+        if (gameOverText != null)
+        {
+            gameOverText.gameObject.SetActive(true);
+        }
     }
 
-    private void UpdateHealthUI(BaseShip health)
+    private void UpdateHealthUI(BaseShip ship)
     {
-        // Aquí puedes agregar lógica para actualizar la interfaz de usuario de salud, como barras de salud o indicadores.
+        if (ship is Player player)
+        {
+            healthBar.value = (float)player.Health / player.MaxHealth;
+            levelText.text = $"Level: {player.Level}";
+        }
     }
 
-    private void UpdateExperienceUI(BaseShip experience)
+    private void UpdateExperienceUI(BaseShip ship)
     {
-        // Aquí puedes agregar lógica para actualizar la interfaz de usuario de experiencia, como barras de experiencia o indicadores.
+        if (ship is Player player)
+        {
+            expBar.value = (float)(player.Experience % 1000) / 1000; // Barra de experiencia para el nivel actual
+        }
     }
 
 

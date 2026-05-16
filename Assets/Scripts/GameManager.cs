@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     {
         if (player == myPlayer)
         {
-            Debug.Log("Has perdido, tu nave ha sido destruida.");
+            OnDefeat?.Invoke();
         }
     }
 }

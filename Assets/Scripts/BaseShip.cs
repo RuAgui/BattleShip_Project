@@ -35,6 +35,7 @@ public class BaseShip : MonoBehaviour
         {
             int levelBefore = Level;
             experience = value;
+            OnExperienceChanged?.Invoke(this); // Dispara el evento cada vez que la experiencia cambia
             if (Level > levelBefore) OnLevelUp();
         }
     }
