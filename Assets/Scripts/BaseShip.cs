@@ -1,9 +1,14 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BaseShip : MonoBehaviour
 {
     [SerializeField] protected int health;
     [SerializeField] protected int experience;
+
+    //EVENTOS
+    public static event UnityAction<BaseShip> OnHealthChanged;
+    public static event UnityAction<BaseShip> OnExperienceChanged;
 
     public int Level => (experience / 1000) + 1;
 
@@ -15,6 +20,7 @@ public class BaseShip : MonoBehaviour
         set
         {
             health = value;
+            OnHealthChanged?.Invoke(this); // Dispara el evento cada vez que la salud cambia
             if (health <= 0)
             {
                 Die();
@@ -43,4 +49,5 @@ public class BaseShip : MonoBehaviour
         //Aqui agrego la lociga de muerte comun a todas las naves.(No player)
         Destroy(gameObject);
     }
+
 }

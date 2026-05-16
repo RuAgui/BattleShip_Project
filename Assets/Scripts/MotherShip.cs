@@ -63,4 +63,6 @@ public class MotherShip : BaseShip
         OnMotherShipDestroy?.Invoke(this);
         base.Die();
     }
+
+
 }

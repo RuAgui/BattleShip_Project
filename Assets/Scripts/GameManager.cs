@@ -5,6 +5,9 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] Player myPlayer;
 
+    public static event UnityAction OnVictory;
+    public static event UnityAction OnDefeat;
+
     [Header("MOTHER SHIP SETTINGS")]
 
     [SerializeField] private MotherShip motherShipAllied;
@@ -31,11 +34,11 @@ public class GameManager : MonoBehaviour
     {
         if (destroyedShip == motherShipAllied)
         {
-            Debug.Log("Has perdido, tu nave nodriza ha sido destruida.");
+            OnDefeat?.Invoke();
         }
         else if (destroyedShip == motherShipEnemy)
         {
-            Debug.Log("Has ganado, la nave nodriza enemiga ha sido destruida.");
+            OnVictory?.Invoke();
         }
     }
 
