@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class UnitAI : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class UnitAI : MonoBehaviour
 
     [SerializeField] private GameObject laserPrefab;
     [SerializeField] private Transform[] firePoints;
+    private ObjectPool<GameObject> _laserPool;
 
     [Header("Survival Settings")]
 
@@ -48,6 +50,19 @@ public class UnitAI : MonoBehaviour
         rb.useGravity = false; // Desactivamos la gravedad para que la nave pueda volar libremente
         rb.linearDamping = 1.5f; // Damping para evitar que la nave se descontrole a altas velocidades
         rb.angularDamping = 2f; // Damping para controlar la rotación y evitar giros bruscos
+
+
+        _laserPool = new ObjectPool<GameObject> (
+            createFunc: () =>
+            {
+                GameObject laser = Instantiate(laserPrefab);
+                laser.GetComponent<SimpleLaser>().onExpire = () => _laserPool.Release(laser);
+            return laser;
+            },
+            actionOnGet: laser => laser.SetActive(true),
+            actionOnRelease: laser => laser.SetActive(false),
+            actionOnDestroy: laser => Destroy(laser)
+        );
 
         //Cada nave elige su camino
 
@@ -124,6 +139,23 @@ public class UnitAI : MonoBehaviour
                
     }
 
+    void TryShoot()
+    {
+        if (Time.time >= nextFireTime)
+        {
+            foreach (var firePoint in firePoints)
+            {
+                GameObject laser = _laserPool.Get();
+                laser.transform.position = firePoint.position;
+                laser.transform.rotation = firePoint.rotation;
+                SimpleLaser sl = laser.GetComponent<SimpleLaser>();
+                sl.ownerShooter = myShipStats;
+                sl.Launch();
+            }
+            nextFireTime = Time.time + 1f / fireRate;
+        }
+    }
+
     void ExecuteFlightManeuvers(Vector3 destination)
     {
         Vector3 directionToTarget = (destination - transform.position).normalized;
@@ -185,24 +217,6 @@ public class UnitAI : MonoBehaviour
         {
             physicalRepulsion = Vector3.ClampMagnitude(physicalRepulsion, 20f);
             rb.AddForce(physicalRepulsion * separationWeight, ForceMode.Acceleration);
-        }
-    }
-
-    private void TryShoot()
-    {
-        if (Time.time > nextFireTime && laserPrefab != null)
-        {
-            nextFireTime = Time.time + fireRate;
-
-            foreach (Transform firePoint in firePoints)
-            {
-                GameObject laser = Instantiate(laserPrefab, firePoint.position, firePoint.rotation);
-
-                //Asigno dueño para que esta nave gane exp y suba de nivel
-
-                SimpleLaser script = laser.GetComponent<SimpleLaser>();
-                if (script != null) script.ownerShooter = GetComponent<BaseShip>();
-            }    
         }
     }
 

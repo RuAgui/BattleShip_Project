@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class SimpleLaser : MonoBehaviour
@@ -10,17 +12,29 @@ public class SimpleLaser : MonoBehaviour
     public BaseShip ownerShooter;
     public float Damage => damage;
 
-    private void Start()
+    public Action onExpire;
+
+    private void OnEnable()
     {
         startPosition = transform.position;
+    }
 
+    public void Launch()
+    {
+        startPosition = transform.position;
         LaserBullet();
     }
 
     private void LaserBullet()
     {
         GetComponent<Rigidbody>().linearVelocity = transform.forward * speed;
-        Destroy(gameObject, lifeTime);
+        StartCoroutine(ExpireAfter(lifeTime));
+    }
+
+    private IEnumerator ExpireAfter(float time)
+    {
+        yield return new WaitForSeconds(time);
+        onExpire?.Invoke();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -41,7 +55,8 @@ public class SimpleLaser : MonoBehaviour
                 Debug.Log($"{ownerShooter.name} recibió EXP por destruir a {target.name}");
             }
 
-            Destroy(gameObject);
+            StopAllCoroutines();
+            onExpire?.Invoke();
         }
     }
 }
