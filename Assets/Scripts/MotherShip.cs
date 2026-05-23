@@ -9,13 +9,14 @@ public class MotherShip : BaseShip
     [SerializeField] private Transform[] spawnPoint;
     [SerializeField] private float spawnRate = 20f;
     [SerializeField] private MotherShip targetMothership; // Referencia a la otra MotherShip
+    public override int MaxHealth => 5000; // Salud máxima fija para la MotherShip
 
     public static event UnityAction<MotherShip> OnMotherShipDestroy;
 
 
     private void Start()
     {
-        Health = 5000;  // Salud de la MotherShip
+        health = 5000;  // Salud de la MotherShip
         if (shipPrefab != null)
         {
             StartCoroutine(SpawnRoutine()); // Iniciar la rutina de spawn

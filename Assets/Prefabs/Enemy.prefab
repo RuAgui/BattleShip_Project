@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 1791195900796108676}
   - component: {fileID: -8584697889425106341}
   - component: {fileID: -1133699900649407624}
+  - component: {fileID: -3637903708555641368}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -126,6 +127,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &5257215807198265780
 MeshCollider:
@@ -239,6 +241,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BaseShip
   health: 500
   experience: 0
+--- !u!114 &-3637903708555641368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239218490876724157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: facb628db2d7ee340b5e127ff63d9db5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LaserShooter
+  laserPrefab: {fileID: 6066077122217037607, guid: 8f40315d0dc110240bc85183a78d52aa, type: 3}
 --- !u!1 &7054584380161126751
 GameObject:
   m_ObjectHideFlags: 0

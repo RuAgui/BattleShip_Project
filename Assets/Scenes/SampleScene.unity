@@ -2465,6 +2465,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5784050967781612583, guid: 3d9ce70bd167b71469f5ab332d2c2f26, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1639089960}
+    - targetCorrespondingSourceObject: {fileID: 5784050967781612583, guid: 3d9ce70bd167b71469f5ab332d2c2f26, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1639089968}
   m_SourcePrefab: {fileID: 100100000, guid: 3d9ce70bd167b71469f5ab332d2c2f26, type: 3}
 --- !u!4 &1639089958 stripped
 Transform:
@@ -2488,7 +2491,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad23663ff38ed7945ba2440b9bfaa2ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
-  laserPrefab: {fileID: 6066077122217037607, guid: aa7c724fedf215541a45c93281be2d2e, type: 3}
   firePoint:
   - {fileID: 1975918862}
   - {fileID: 452271964}
@@ -2672,6 +2674,19 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1639089968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639089959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: facb628db2d7ee340b5e127ff63d9db5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LaserShooter
+  laserPrefab: {fileID: 6066077122217037607, guid: aa7c724fedf215541a45c93281be2d2e, type: 3}
 --- !u!1 &1655256232
 GameObject:
   m_ObjectHideFlags: 0

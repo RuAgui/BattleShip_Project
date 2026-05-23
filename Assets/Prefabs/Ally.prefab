@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -7820235111973391584}
   - component: {fileID: 2085680896351700093}
   - component: {fileID: -6150501683539514187}
+  - component: {fileID: 8600199423499691624}
   m_Layer: 0
   m_Name: Ally
   m_TagString: Ally
@@ -95,6 +96,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &84904537082048765
 MeshCollider:
@@ -208,6 +210,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BaseShip
   health: 500
   experience: 0
+--- !u!114 &8600199423499691624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3047083402325453050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: facb628db2d7ee340b5e127ff63d9db5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LaserShooter
+  laserPrefab: {fileID: 6066077122217037607, guid: aa7c724fedf215541a45c93281be2d2e, type: 3}
 --- !u!1 &5810434518365982920
 GameObject:
   m_ObjectHideFlags: 0

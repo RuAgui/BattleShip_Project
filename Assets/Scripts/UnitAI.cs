@@ -27,7 +27,7 @@ public class UnitAI : MonoBehaviour
 
     [SerializeField] private GameObject laserPrefab;
     [SerializeField] private Transform[] firePoints;
-    private ObjectPool<GameObject> _laserPool;
+    private LaserShooter _laserShooter;
 
     [Header("Survival Settings")]
 
@@ -46,23 +46,13 @@ public class UnitAI : MonoBehaviour
 
     void Awake()
     {
+
+        _laserShooter = GetComponent<LaserShooter>();
+
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false; // Desactivamos la gravedad para que la nave pueda volar libremente
         rb.linearDamping = 1.5f; // Damping para evitar que la nave se descontrole a altas velocidades
         rb.angularDamping = 2f; // Damping para controlar la rotación y evitar giros bruscos
-
-
-        _laserPool = new ObjectPool<GameObject> (
-            createFunc: () =>
-            {
-                GameObject laser = Instantiate(laserPrefab);
-                laser.GetComponent<SimpleLaser>().onExpire = () => _laserPool.Release(laser);
-            return laser;
-            },
-            actionOnGet: laser => laser.SetActive(true),
-            actionOnRelease: laser => laser.SetActive(false),
-            actionOnDestroy: laser => Destroy(laser)
-        );
 
         //Cada nave elige su camino
 
@@ -145,12 +135,7 @@ public class UnitAI : MonoBehaviour
         {
             foreach (var firePoint in firePoints)
             {
-                GameObject laser = _laserPool.Get();
-                laser.transform.position = firePoint.position;
-                laser.transform.rotation = firePoint.rotation;
-                SimpleLaser sl = laser.GetComponent<SimpleLaser>();
-                sl.ownerShooter = myShipStats;
-                sl.Launch();
+               _laserShooter.Shoot(firePoint, myShipStats);
             }
             nextFireTime = Time.time + 1f / fireRate;
         }

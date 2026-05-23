@@ -12,13 +12,14 @@ public class BaseShip : MonoBehaviour
 
     public int Level => (experience / 1000) + 1;
 
-    public int MaxHealth => 100 + (Level - 1) * 20; // Ejemplo de fórmula para salud máxima basada en el nivel
+    public virtual int MaxHealth => 500 + (Level - 1) * 20; // Ejemplo de fórmula para salud máxima basada en el nivel
 
     public int Health
     {
         get { return health; }
         set
         {
+            Debug.Log($"[{gameObject.name}] Salud cambiada de {health} a {value}");
             health = value;
             OnHealthChanged?.Invoke(this); // Dispara el evento cada vez que la salud cambia
             if (health <= 0)

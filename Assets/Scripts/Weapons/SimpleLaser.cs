@@ -42,7 +42,7 @@ public class SimpleLaser : MonoBehaviour
         BaseShip target = other.GetComponent<BaseShip>();
 
         // 1. Verificamos que chocamos con una nave y que no somos nosotros mismos
-        if (target != null && target != ownerShooter)
+        if (target != null && target.gameObject.tag != ownerShooter.gameObject.tag)
         {
             target.Health -= (int)damage;
             Debug.Log("Laser ha chocado con: " + other.gameObject.name);
