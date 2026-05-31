@@ -43,6 +43,8 @@ public class UnitAI : MonoBehaviour
     private BaseShip currentTarget; // Puede ser la MotherShip enemiga o una nave enemiga detectada
     private Vector3 flightDirection; // Direccion de vuelo de la nave.
     private float currentRoll; // Para el efecto de inclinacion al girar.
+    private float _nextScanTime;
+    [SerializeField] private float scanRate = 0.5f; // Cada cuanto tiempo la nave escanea en busca de enemigos cercanos (en segundos)
 
     void Awake()
     {
@@ -73,7 +75,11 @@ public class UnitAI : MonoBehaviour
         else
         {
             //Sino puede huir (o tiene vida) ataca o viaja segun el estado
-            if (currentTarget == null) FindNearbyEnemy();
+           if (currentTarget == null && Time.time >= _nextScanTime)
+            {
+                FindNearbyEnemy();
+                _nextScanTime = Time.time + scanRate;
+            }
 
             //Si el enemigo muere, currentTarget se vuelve null y la nave continua.
 
@@ -229,5 +235,4 @@ public class UnitAI : MonoBehaviour
 
         currentTarget = closestEnemy;
     }
-        
 }
