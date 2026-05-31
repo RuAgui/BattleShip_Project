@@ -10,22 +10,20 @@ public class BaseShip : MonoBehaviour
     public static event UnityAction<BaseShip> OnHealthChanged;
     public static event UnityAction<BaseShip> OnExperienceChanged;
 
+
     public int Level => (experience / 1000) + 1;
 
     public virtual int MaxHealth => 500 + (Level - 1) * 20; // Ejemplo de fórmula para salud máxima basada en el nivel
 
+    public BaseShip lastAttacker;
     public int Health
     {
         get { return health; }
         set
         {
-            Debug.Log($"[{gameObject.name}] Salud cambiada de {health} a {value}");
             health = value;
-            OnHealthChanged?.Invoke(this); // Dispara el evento cada vez que la salud cambia
-            if (health <= 0)
-            {
-                Die();
-            }
+            OnHealthChanged?.Invoke(this);
+            if (health <= 0) Die();
         }
     }
 
@@ -49,6 +47,11 @@ public class BaseShip : MonoBehaviour
     protected virtual void Die()
     {
         //Aqui agrego la lociga de muerte comun a todas las naves.(No player)
+        if (lastAttacker != null)
+        {
+            lastAttacker.Experience += 200; // Recompensa de experiencia por destruir esta nave
+            Debug.Log($"{gameObject.name} ha sido destruida por {lastAttacker.gameObject.name}");
+        }
         Destroy(gameObject);
     }
 
