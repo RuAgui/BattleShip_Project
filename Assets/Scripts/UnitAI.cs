@@ -25,7 +25,6 @@ public class UnitAI : MonoBehaviour
 
     [Header("Armament Settings")]
 
-    [SerializeField] private GameObject laserPrefab;
     [SerializeField] private Transform[] firePoints;
     private LaserShooter _laserShooter;
 
