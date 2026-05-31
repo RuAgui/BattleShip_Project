@@ -1,9 +1,11 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ShipWorldUI : MonoBehaviour
 {
-    [SerializeField] private Slider healthBar;
+    [SerializeField] private Image healthBar;
+    [SerializeField] private TextMeshProUGUI healthText;
     private BaseShip _myShip;
 
     private void Awake()
@@ -24,12 +26,8 @@ public class ShipWorldUI : MonoBehaviour
     private void UpdateHealthBar(BaseShip ship)
     {
         if (ship != _myShip) return;
-        healthBar.value = (float) _myShip.Health / _myShip.MaxHealth;
-    }
-
-    private void LateUpdate()
-    {
-        transform.LookAt(Camera.main.transform);
-        transform.Rotate(0, 180f, 0); // Para que el UI mire hacia la camara pero no al reves
+        float healthPercent = (float)ship.Health / ship.MaxHealth;
+        healthBar.fillAmount = healthPercent;
+        healthText.text = $"{ship.Health} / {ship.MaxHealth}";
     }
 }
